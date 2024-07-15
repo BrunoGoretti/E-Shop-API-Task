@@ -17,8 +17,16 @@ namespace EShopAPI.Services
 
         public async Task<Usermodel> GetUserIdAsync(int userId)
         {
-            var user = await _context.DbUsers.FirstOrDefaultAsync(u => u.UserId == userId);
-            return user;
+            var newUser = new Usermodel
+            {
+                UserId = userId,
+            };
+
+            _context.Add(newUser);
+
+            await _context.SaveChangesAsync();
+
+            return newUser;
         }
 
       
