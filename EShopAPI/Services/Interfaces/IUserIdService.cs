@@ -1,6 +1,9 @@
-﻿namespace EShopAPI.Services.Interfaces
+﻿using EShopAPI.Models;
+
+namespace EShopAPI.Services.Interfaces
 {
     public interface IUserIdService
     {
+
     }
 }

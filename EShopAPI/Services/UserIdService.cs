@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EShopAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EShopAPI.Services
 {
-    public class UserIdService : Controller
+    public class UserIdService : IUserIdService
     {
         public IActionResult Index()
         {
-            return View();
+            Console.WriteLine("asd");
         }
     }
 }
