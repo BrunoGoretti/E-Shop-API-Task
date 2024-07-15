@@ -21,7 +21,6 @@ namespace EShopAPI.Services
             {
                 UserId = userId,
             };
-
             _context.Add(newUser);
 
             await _context.SaveChangesAsync();
@@ -29,6 +28,6 @@ namespace EShopAPI.Services
             return newUser;
         }
 
-      
+
     }
 }

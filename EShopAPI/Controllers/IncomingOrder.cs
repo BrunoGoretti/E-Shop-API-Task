@@ -1,6 +1,5 @@
 ﻿using EShopAPI.Models;
 using EShopAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EShopAPI.Controllers

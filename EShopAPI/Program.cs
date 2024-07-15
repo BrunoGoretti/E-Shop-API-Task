@@ -1,7 +1,7 @@
 using EShopAPI.Data;
-using EShopAPI.Services;
 using EShopAPI.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using EShopAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +12,13 @@ builder.Services.AddDbContext<ApiContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+
 builder.Services.AddScoped<IUserIdService, UserIdService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 var app = builder.Build();
 
