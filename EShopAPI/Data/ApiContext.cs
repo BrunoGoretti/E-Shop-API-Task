@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EShopAPI.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace EShopAPI.Data
@@ -6,15 +7,7 @@ namespace EShopAPI.Data
     public class ApiContext : DbContext
     {
         public ApiContext(DbContextOptions<ApiContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<UserOptions> DbUsers { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<UserOptions>().HasNoKey();
-        }
+                : base(options) { }
+        public DbSet<UserOrdersModel> DbUsers { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace EShopAPI.Models
 {
-    public class Usermodel
+    public class UserOrdersModel
     {
         [Key]
         public int UserId { get; set; }

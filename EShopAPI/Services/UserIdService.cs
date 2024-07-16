@@ -15,9 +15,9 @@ namespace EShopAPI.Services
             _context = context;
         }
 
-        public async Task<Usermodel> GetUserIdAsync(int userId)
+        public async Task<UserOrdersModel> GetUserIdAsync(int userId)
         {
-            var newUser = new Usermodel
+            var newUser = new UserOrdersModel
             {
                 UserId = userId,
             };

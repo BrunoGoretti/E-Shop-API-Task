@@ -1,6 +1,6 @@
-﻿using EShopAPI.Models;
-using EShopAPI.Services.Interfaces;
+﻿using EShopAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using EShopAPI.Models;
 
 namespace EShopAPI.Controllers
 {
@@ -17,17 +17,10 @@ namespace EShopAPI.Controllers
 
         // POST api/incomingorder/adduser
         [HttpPost("adduser")]
-        public async Task<ActionResult<Usermodel>> AddUserAsync(int userId)
+        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId)
         {
-            try
-            {
-                var newUser = await _userIdService.GetUserIdAsync(userId);
-                return Ok(newUser);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding user: {ex.Message}");
-            }
+            var newUser = await _userIdService.GetUserIdAsync(userId);
+            return (newUser);
         }
 
     }
