@@ -5,7 +5,7 @@
 namespace EShopAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class igrationName : Migration
+    public partial class asdasdds : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,10 +16,10 @@ namespace EShopAPI.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNumber = table.Column<int>(type: "int", nullable: false),
-                    PayableAmount = table.Column<double>(type: "float", nullable: false),
-                    PaymentGateway = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OptionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OrderNumber = table.Column<int>(type: "int", nullable: true),
+                    PayableAmount = table.Column<double>(type: "float", nullable: true),
+                    PaymentGateway = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    OptionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

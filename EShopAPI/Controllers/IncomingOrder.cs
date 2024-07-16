@@ -15,12 +15,11 @@ namespace EShopAPI.Controllers
             _userIdService = userIdService;
         }
 
-        // POST api/incomingorder/adduser
-        [HttpPost("adduser")]
+        [HttpPost("Add_user")]
         public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId)
         {
             var newUser = await _userIdService.GetUserIdAsync(userId);
-            return (newUser);
+            return Ok(newUser);
         }
 
     }
