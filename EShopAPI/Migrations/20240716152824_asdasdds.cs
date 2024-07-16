@@ -14,8 +14,9 @@ namespace EShopAPI.Migrations
                 name: "DbUsers",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     OrderNumber = table.Column<int>(type: "int", nullable: true),
                     PayableAmount = table.Column<double>(type: "float", nullable: true),
                     PaymentGateway = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -23,7 +24,7 @@ namespace EShopAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DbUsers", x => x.UserId);
+                    table.PrimaryKey("PK_DbUsers", x => x.Id);
                 });
         }
 

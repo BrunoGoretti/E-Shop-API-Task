@@ -8,19 +8,28 @@ namespace EShopAPI.Controllers
     [ApiController]
     public class IncomingOrder : ControllerBase
     {
-        private readonly IUserIdService _userIdService;
+        public readonly IUserIdService _userIdService;
+        public readonly IOrderNumberService _userOrderService;
 
-        public IncomingOrder(IUserIdService userIdService)
+        public IncomingOrder(IUserIdService userIdService, IOrderNumberService userOrderNumber)
         {
             _userIdService = userIdService;
+            _userOrderService = userOrderNumber;
         }
 
-        [HttpPost("Add_user")]
-        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId)
+        [HttpPost("Make_order")]
+        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber)
         {
             var newUser = await _userIdService.GetUserIdAsync(userId);
-            return Ok(newUser);
-        }
+            var addOrder = await _userOrderService.GetOrderNumberAsync(orderNumber);
 
+            var response = new UserOrdersModel
+            {
+                UserId = newUser.UserId,
+                OrderNumber = addOrder.OrderNumber
+            };
+
+            return Ok(response);
+        }
     }
 }

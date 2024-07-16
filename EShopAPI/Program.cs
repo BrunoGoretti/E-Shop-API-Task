@@ -14,6 +14,8 @@ builder.Services.AddDbContext<ApiContext>(options =>
 
 
 builder.Services.AddScoped<IUserIdService, UserIdService>();
+builder.Services.AddScoped<IOrderNumberService, OrderNumberService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
