@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShopAPI.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20240716163300_asdasdds")]
-    partial class asdasdds
+    [Migration("20240717121717_name")]
+    partial class name
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
