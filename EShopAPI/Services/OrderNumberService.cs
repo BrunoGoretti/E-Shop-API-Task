@@ -16,15 +16,16 @@ namespace EShopAPI.Services
 
         public async Task<UserOrdersModel> GetOrderNumberAsync(int orderNumber)
         {
+            var newUserOrder = new UserOrdersModel
+            {
+                OrderNumber = orderNumber
+            };
 
-            var newOrderNumber = new UserOrdersModel { OrderNumber = orderNumber };
-
-            await _context.DbUsers.AddAsync(newOrderNumber);
+            _context.DbUsers.Add(newUserOrder);
             await _context.SaveChangesAsync();
 
-            return await _context.DbUsers
-                .Where(x => x.OrderNumber == orderNumber)
-                .FirstOrDefaultAsync() ?? newOrderNumber;
+            return newUserOrder;
         }
     }
 }
+
