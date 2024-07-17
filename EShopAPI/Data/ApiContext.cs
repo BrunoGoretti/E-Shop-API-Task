@@ -8,5 +8,7 @@ namespace EShopAPI.Data
         public ApiContext(DbContextOptions<ApiContext> options)
                 : base(options) { }
         public DbSet<UserOrdersModel> DbUsers { get; set; }
+        public DbSet<ReceiptModel> Receipts { get; set; }
+
     }
 }

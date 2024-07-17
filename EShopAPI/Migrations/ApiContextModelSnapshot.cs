@@ -22,6 +22,29 @@ namespace EShopAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("EShopAPI.Models.ReceiptModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("AmountPaid")
+                        .HasColumnType("float");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReceiptNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Receipts");
+                });
+
             modelBuilder.Entity("EShopAPI.Models.UserOrdersModel", b =>
                 {
                     b.Property<int>("Id")
@@ -31,6 +54,7 @@ namespace EShopAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("OptionalDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderNumber")
@@ -40,6 +64,7 @@ namespace EShopAPI.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("PaymentGateway")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
