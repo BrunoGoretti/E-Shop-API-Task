@@ -1,6 +1,7 @@
 ﻿using EShopAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EShopAPI.Models;
+using EShopAPI.Data;
 
 namespace EShopAPI.Controllers
 {
@@ -8,28 +9,41 @@ namespace EShopAPI.Controllers
     [ApiController]
     public class IncomingOrder : ControllerBase
     {
+        public readonly ApiContext _context;
         public readonly IUserIdService _userIdService;
         public readonly IOrderNumberService _userOrderService;
+        public readonly IPayableAmountService _userPayableAmount;
+        public readonly IPaymentGatewayService _userGatewayService;
+        public readonly IOptionalDescriptionService _userOptimalDescription;
 
-        public IncomingOrder(IUserIdService userIdService, IOrderNumberService userOrderNumber)
+        public IncomingOrder(ApiContext context, IUserIdService userIdService, IOrderNumberService userOrderService, IPayableAmountService userPayableAmount, 
+            IPaymentGatewayService userGatewayService, IOptionalDescriptionService userOptimalDescription)
         {
+            _context = context;
             _userIdService = userIdService;
-            _userOrderService = userOrderNumber;
+            _userOrderService = userOrderService;
+            _userPayableAmount = userPayableAmount;
+            _userGatewayService = userGatewayService;
+            _userOptimalDescription = userOptimalDescription;
         }
 
         [HttpPost("Make_order")]
-        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber)
+        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber, double paymentAmount, string paymentGateway,
+            string optimalDescription)
         {
-            var newUser = await _userIdService.GetUserIdAsync(userId);
-            var addOrder = await _userOrderService.GetOrderNumberAsync(orderNumber);
-
-            var response = new UserOrdersModel
+            var newUserOrder = new UserOrdersModel
             {
-                UserId = newUser.UserId,
-                OrderNumber = addOrder.OrderNumber
+                UserId = userId,
+                OrderNumber = orderNumber,
+                PayableAmount = paymentAmount,
+                PaymentGateway = paymentGateway,
+                OptionalDescription = optimalDescription
             };
 
-            return Ok(response);
+            _context.DbUsers.Add(newUserOrder);
+            await _context.SaveChangesAsync();
+
+            return Ok(newUserOrder);
         }
     }
 }

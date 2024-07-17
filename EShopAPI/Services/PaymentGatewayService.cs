@@ -1,12 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EShopAPI.Data;
+using EShopAPI.Models;
+using EShopAPI.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EShopAPI.Services
 {
-    public class PaymentGatewayService : Controller
+    public class PaymentGatewayService : IPaymentGatewayService
     {
-        public IActionResult Index()
+        private readonly ApiContext _context;
+        public PaymentGatewayService(ApiContext context)
         {
-            return View();
+            _context = context;
+        }
+        public async Task<UserOrdersModel> GetPaymentGatewayAsync(string payGateway)
+        {
+            var newPaymentGateway = new UserOrdersModel
+            {
+                PaymentGateway = payGateway
+            };
+
+            _context.DbUsers.Add(newPaymentGateway);
+            await _context.SaveChangesAsync();
+
+            return newPaymentGateway;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

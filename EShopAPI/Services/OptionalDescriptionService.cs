@@ -1,12 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EShopAPI.Data;
+using EShopAPI.Models;
+using EShopAPI.Services.Interfaces;
 
 namespace EShopAPI.Services
 {
-    public class OptionalDescriptionService : Controller
+    public class OptionalDescriptionService : IOptionalDescriptionService
     {
-        public IActionResult Index()
+        private readonly ApiContext _context;
+
+        public OptionalDescriptionService(ApiContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<UserOrdersModel> GetOptionalDescriptionAsync(string optimalDescription)
+        {
+            var newOptimalDescription = new UserOrdersModel
+            {
+                OptionalDescription = optimalDescription
+            };
+
+            _context.DbUsers.Add(newOptimalDescription);
+            await _context.SaveChangesAsync();
+
+            return newOptimalDescription;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -14,6 +14,9 @@ builder.Services.AddDbContext<ApiContext>(options =>
 
 builder.Services.AddScoped<IUserIdService, UserIdService>();
 builder.Services.AddScoped<IOrderNumberService, OrderNumberService>();
+builder.Services.AddScoped<IPayableAmountService, PayableAmountService>();
+builder.Services.AddScoped<IPaymentGatewayService, PaymentGatewayService>();
+builder.Services.AddScoped<IOptionalDescriptionService, OptionalDescriptionService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
