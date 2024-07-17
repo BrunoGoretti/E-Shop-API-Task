@@ -1,6 +1,7 @@
 ﻿using EShopAPI.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using EShopAPI.Models;
+using EShopAPI.Data;
 
 namespace EShopAPI.Controllers
 {
@@ -8,28 +9,33 @@ namespace EShopAPI.Controllers
     [ApiController]
     public class IncomingOrder : ControllerBase
     {
+        public readonly ApiContext _context;
         public readonly IUserIdService _userIdService;
         public readonly IOrderNumberService _userOrderService;
+        public readonly IPayableAmountService _userPayableAmount;
 
-        public IncomingOrder(IUserIdService userIdService, IOrderNumberService userOrderNumber)
+        public IncomingOrder(ApiContext context, IUserIdService userIdService, IOrderNumberService userOrderService, IPayableAmountService userPayableAmount)
         {
+            _context = context;
             _userIdService = userIdService;
-            _userOrderService = userOrderNumber;
+            _userOrderService = userOrderService;
+            _userPayableAmount = userPayableAmount;
         }
 
         [HttpPost("Make_order")]
-        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber)
+        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber, double paymentAmount)
         {
-            var newUser = await _userIdService.GetUserIdAsync(userId);
-            var addOrder = await _userOrderService.GetOrderNumberAsync(orderNumber);
-
-            var response = new UserOrdersModel
+            var newUserOrder = new UserOrdersModel
             {
-                UserId = newUser.UserId,
-                OrderNumber = addOrder.OrderNumber
+                UserId = userId,
+                OrderNumber = orderNumber,
+                PayableAmount = paymentAmount
             };
 
-            return Ok(response);
+            _context.DbUsers.Add(newUserOrder);
+            await _context.SaveChangesAsync();
+
+            return Ok(newUserOrder);
         }
     }
 }

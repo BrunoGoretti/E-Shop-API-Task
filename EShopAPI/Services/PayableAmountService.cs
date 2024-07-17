@@ -1,12 +1,33 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EShopAPI.Data;
+using EShopAPI.Models;
+using EShopAPI.Services.Interfaces;
 
 namespace EShopAPI.Services
 {
-    public class PayableAmountService : Controller
+    public class PayableAmountService : IPayableAmountService
     {
-        public IActionResult Index()
+        private readonly ApiContext _context;
+        public PayableAmountService(ApiContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        public async Task<UserOrdersModel> GetPayableAmountAsync(double payAmount)
+        {
+            var newPaymentAmount = new UserOrdersModel
+            {
+                PayableAmount = payAmount
+            };
+
+            _context.DbUsers.Add(newPaymentAmount);
+            await _context.SaveChangesAsync();
+
+            return newPaymentAmount;
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
