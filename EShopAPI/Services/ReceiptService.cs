@@ -26,7 +26,7 @@ namespace EShopAPI.Services
                     AmountPaid = order.PayableAmount ?? 0,
                     ReceiptNumber = Guid.NewGuid().ToString()
                 };
-
+                
                 _context.Receipts.Add(receipt);
                 await _context.SaveChangesAsync();
 

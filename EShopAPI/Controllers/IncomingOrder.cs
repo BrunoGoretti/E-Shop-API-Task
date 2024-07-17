@@ -48,11 +48,11 @@ namespace EShopAPI.Controllers
             try
             {
                 var receipt = await _receiptService.CreateReceiptAsync(newUserOrder);
-                return Ok(receipt);
+                return Ok($"Order processed successfully. Receipt number: {receipt.ReceiptNumber}");
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return StatusCode(500, $"Failed to process order: {ex.Message}");
             }
         }
     }
