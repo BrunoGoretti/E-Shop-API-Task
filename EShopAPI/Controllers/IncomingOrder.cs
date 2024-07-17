@@ -15,9 +15,10 @@ namespace EShopAPI.Controllers
         public readonly IPayableAmountService _userPayableAmount;
         public readonly IPaymentGatewayService _userGatewayService;
         public readonly IOptionalDescriptionService _userOptimalDescription;
+        private readonly IReceiptService _receiptService;
 
         public IncomingOrder(ApiContext context, IUserIdService userIdService, IOrderNumberService userOrderService, IPayableAmountService userPayableAmount, 
-            IPaymentGatewayService userGatewayService, IOptionalDescriptionService userOptimalDescription)
+            IPaymentGatewayService userGatewayService, IOptionalDescriptionService userOptimalDescription, IReceiptService receiptService)
         {
             _context = context;
             _userIdService = userIdService;
@@ -25,10 +26,11 @@ namespace EShopAPI.Controllers
             _userPayableAmount = userPayableAmount;
             _userGatewayService = userGatewayService;
             _userOptimalDescription = userOptimalDescription;
+            _receiptService = receiptService;
         }
 
-        [HttpPost("Make_order")]
-        public async Task<ActionResult<UserOrdersModel>> AddUserAsync(int userId, int orderNumber, double paymentAmount, string paymentGateway,
+    [HttpPost("Make_order")]
+        public async Task<ActionResult<ReceiptModel>> AddUserAsync(int userId, int orderNumber, double paymentAmount, string paymentGateway,
             string optimalDescription)
         {
             var newUserOrder = new UserOrdersModel
@@ -43,7 +45,15 @@ namespace EShopAPI.Controllers
             _context.DbUsers.Add(newUserOrder);
             await _context.SaveChangesAsync();
 
-            return Ok(newUserOrder);
+            try
+            {
+                var receipt = await _receiptService.CreateReceiptAsync(newUserOrder);
+                return Ok($"Order processed successfully. Receipt number: {receipt.ReceiptNumber}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to process order: {ex.Message}");
+            }
         }
     }
 }

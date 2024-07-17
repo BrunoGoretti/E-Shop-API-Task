@@ -9,7 +9,7 @@ namespace EShopAPI.Models
         public int UserId { get; set; }
         public int OrderNumber { get; set; }
         public double? PayableAmount { get; set; }
-        public string? PaymentGateway { get; set; }
-        public string? OptionalDescription { get; set; }
+        public string PaymentGateway { get; set; }
+        public string OptionalDescription { get; set; }
     }
 }
