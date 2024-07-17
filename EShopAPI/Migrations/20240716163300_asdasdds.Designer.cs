@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EShopAPI.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20240716152824_asdasdds")]
+    [Migration("20240716163300_asdasdds")]
     partial class asdasdds
     {
         /// <inheritdoc />
@@ -36,7 +36,7 @@ namespace EShopAPI.Migrations
                     b.Property<string>("OptionalDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderNumber")
+                    b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
                     b.Property<double?>("PayableAmount")
@@ -45,7 +45,7 @@ namespace EShopAPI.Migrations
                     b.Property<string>("PaymentGateway")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

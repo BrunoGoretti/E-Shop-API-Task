@@ -33,7 +33,7 @@ namespace EShopAPI.Migrations
                     b.Property<string>("OptionalDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderNumber")
+                    b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
                     b.Property<double?>("PayableAmount")
@@ -42,7 +42,7 @@ namespace EShopAPI.Migrations
                     b.Property<string>("PaymentGateway")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

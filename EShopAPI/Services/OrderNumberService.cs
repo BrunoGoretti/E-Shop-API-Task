@@ -1,7 +1,6 @@
 ﻿using EShopAPI.Data;
 using EShopAPI.Models;
 using EShopAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace EShopAPI.Services
@@ -18,19 +17,14 @@ namespace EShopAPI.Services
         public async Task<UserOrdersModel> GetOrderNumberAsync(int orderNumber)
         {
 
-            // Create a new UserOrdersModel instance
             var newOrderNumber = new UserOrdersModel { OrderNumber = orderNumber };
 
-            // Add it to the context
-            _context.DbUsers.Add(newOrderNumber);
+            await _context.DbUsers.AddAsync(newOrderNumber);
+            await _context.SaveChangesAsync();
 
-            // Save changes to the database
-             _context.SaveChangesAsync();
-
-            // Retrieve the added entity (optional, if needed)
-            var addedOrder = await _context.DbUsers.FirstOrDefaultAsync(x => x.OrderNumber == orderNumber);
-
-            return addedOrder;
+            return await _context.DbUsers
+                .Where(x => x.OrderNumber == orderNumber)
+                .FirstOrDefaultAsync() ?? newOrderNumber;
         }
     }
 }

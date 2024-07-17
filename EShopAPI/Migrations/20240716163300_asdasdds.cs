@@ -16,8 +16,8 @@ namespace EShopAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: true),
-                    OrderNumber = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    OrderNumber = table.Column<int>(type: "int", nullable: false),
                     PayableAmount = table.Column<double>(type: "float", nullable: true),
                     PaymentGateway = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OptionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
