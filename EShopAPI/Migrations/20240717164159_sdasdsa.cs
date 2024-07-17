@@ -33,7 +33,7 @@ namespace EShopAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
                     AmountPaid = table.Column<double>(type: "float", nullable: false),
                     ReceiptNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },

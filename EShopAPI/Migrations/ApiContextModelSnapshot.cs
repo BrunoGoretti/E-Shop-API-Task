@@ -33,12 +33,12 @@ namespace EShopAPI.Migrations
                     b.Property<double>("AmountPaid")
                         .HasColumnType("float");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ReceiptNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
