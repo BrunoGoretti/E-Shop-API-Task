@@ -9,6 +9,6 @@ namespace EShopAPI.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public double AmountPaid { get; set; }
-        public string ReceiptNumber { get; set; }
+        public string? ReceiptNumber { get; set; }
     }
 }
