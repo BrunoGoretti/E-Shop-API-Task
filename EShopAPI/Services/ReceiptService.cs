@@ -13,10 +13,9 @@ namespace EShopAPI.Services
             _context = context;
         }
 
-        public async Task<ReceiptModel> CreateReceiptAsync(UserOrdersModel order)
+        public virtual async Task<ReceiptModel> CreateReceiptAsync(UserOrdersModel order)
         {
-            // Simulate payment processing
-            bool paymentSuccess = true; // Replace with actual payment gateway logic
+            bool paymentSuccess = true;
 
             if (paymentSuccess)
             {

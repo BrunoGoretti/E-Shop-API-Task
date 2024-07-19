@@ -1,7 +1,6 @@
 ﻿using EShopAPI.Data;
 using EShopAPI.Models;
 using EShopAPI.Services.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EShopAPI.Services
 {

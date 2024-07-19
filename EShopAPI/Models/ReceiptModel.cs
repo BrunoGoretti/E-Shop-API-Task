@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EShopAPI.Models
 {
@@ -9,6 +8,6 @@ namespace EShopAPI.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public double AmountPaid { get; set; }
-        public string ReceiptNumber { get; set; }
+        public string? ReceiptNumber { get; set; }
     }
 }
