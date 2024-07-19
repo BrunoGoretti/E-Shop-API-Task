@@ -5,7 +5,7 @@
 namespace EShopAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class sdasdsa : Migration
+    public partial class migrationdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,9 +18,9 @@ namespace EShopAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     OrderNumber = table.Column<int>(type: "int", nullable: false),
-                    PayableAmount = table.Column<double>(type: "float", nullable: true),
+                    PayableAmount = table.Column<double>(type: "float", nullable: false),
                     PaymentGateway = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OptionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    OptionalDescription = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

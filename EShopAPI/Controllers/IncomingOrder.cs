@@ -14,24 +14,24 @@ namespace EShopAPI.Controllers
         public readonly IOrderNumberService _userOrderService;
         public readonly IPayableAmountService _userPayableAmount;
         public readonly IPaymentGatewayService _userGatewayService;
-        public readonly IOptionalDescriptionService _userOptimalDescription;
+        public readonly IOptionalDescriptionService _userOptionalDescription;
         private readonly IReceiptService _receiptService;
 
         public IncomingOrder(ApiContext context, IUserIdService userIdService, IOrderNumberService userOrderService, IPayableAmountService userPayableAmount, 
-            IPaymentGatewayService userGatewayService, IOptionalDescriptionService userOptimalDescription, IReceiptService receiptService)
+            IPaymentGatewayService userGatewayService, IOptionalDescriptionService userOptionalDescription, IReceiptService receiptService)
         {
             _context = context;
             _userIdService = userIdService;
             _userOrderService = userOrderService;
             _userPayableAmount = userPayableAmount;
             _userGatewayService = userGatewayService;
-            _userOptimalDescription = userOptimalDescription;
+            _userOptionalDescription = userOptionalDescription;
             _receiptService = receiptService;
         }
 
     [HttpPost("Make_order")]
         public async Task<ActionResult<ReceiptModel>> AddUserAsync(int userId, int orderNumber, double paymentAmount, string paymentGateway,
-            string optimalDescription)
+            string? optionalDescription)
         {
             var newUserOrder = new UserOrdersModel
             {
@@ -39,7 +39,7 @@ namespace EShopAPI.Controllers
                 OrderNumber = orderNumber,
                 PayableAmount = paymentAmount,
                 PaymentGateway = paymentGateway,
-                OptionalDescription = optimalDescription
+                OptionalDescription = optionalDescription
             };
 
             _context.DbUsers.Add(newUserOrder);

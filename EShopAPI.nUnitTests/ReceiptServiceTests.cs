@@ -63,13 +63,13 @@
         }
 
         [Test]
-        public async Task CreateReceiptAsync_ShouldHandleNullPayableAmount()
+        public async Task CreateReceiptAsync_ShouldHandleZeroPayableAmount()
         {
             // Arrange
             var order = new UserOrdersModel
             {
                 UserId = 1,
-                PayableAmount = null
+                PayableAmount = 0 // This should be zero to reflect the test case
             };
 
             // Act
