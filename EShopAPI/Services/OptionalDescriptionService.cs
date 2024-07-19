@@ -2,33 +2,31 @@
 using EShopAPI.Models;
 using EShopAPI.Services.Interfaces;
 
-namespace EShopAPI.Services
+public class OptionalDescriptionService : IOptionalDescriptionService
 {
-    public class OptionalDescriptionService : IOptionalDescriptionService
+    private readonly ApiContext _context;
+
+    public OptionalDescriptionService(ApiContext context)
     {
-        private readonly ApiContext _context;
+        _context = context;
+    }
 
-        public OptionalDescriptionService(ApiContext context)
+    public async Task<UserOrdersModel> GetOptionalDescriptionAsync(string optionalDescription)
+    {
+        var newOptionalDescription = new UserOrdersModel
         {
-            _context = context;
-        }
+            OptionalDescription = optionalDescription,
+            PaymentGateway = "DefaultGateway" 
+        };
 
-        public async Task<UserOrdersModel> GetOptionalDescriptionAsync(string optimalDescription)
-        {
-            var newOptimalDescription = new UserOrdersModel
-            {
-                OptionalDescription = optimalDescription
-            };
+        _context.DbUsers.Add(newOptionalDescription);
+        await _context.SaveChangesAsync();
 
-            _context.DbUsers.Add(newOptimalDescription);
-            await _context.SaveChangesAsync();
+        return newOptionalDescription;
+    }
 
-            return newOptimalDescription;
-        }
-
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }

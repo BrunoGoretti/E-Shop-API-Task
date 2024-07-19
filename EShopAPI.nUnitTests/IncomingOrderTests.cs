@@ -53,7 +53,7 @@ namespace EShopAPI.nUnitTest
             int orderNumber = 123;
             double paymentAmount = 99.99;
             string paymentGateway = "PayPal";
-            string optimalDescription = "Order for electronic items";
+            string optionalDescription = "Order for electronic items";
 
             var newUserOrder = new UserOrdersModel
             {
@@ -61,7 +61,7 @@ namespace EShopAPI.nUnitTest
                 OrderNumber = orderNumber,
                 PayableAmount = paymentAmount,
                 PaymentGateway = paymentGateway,
-                OptionalDescription = optimalDescription
+                OptionalDescription = optionalDescription
             };
 
             var receipt = new ReceiptModel
@@ -75,7 +75,7 @@ namespace EShopAPI.nUnitTest
             _mockReceiptService.Setup(r => r.CreateReceiptAsync(It.IsAny<UserOrdersModel>())).ReturnsAsync(receipt);
 
             // Act
-            var result = await _controller.AddUserAsync(userId, orderNumber, paymentAmount, paymentGateway, optimalDescription);
+            var result = await _controller.AddUserAsync(userId, orderNumber, paymentAmount, paymentGateway, optionalDescription);
 
             // Assert
             ClassicAssert.That(result.Result, Is.InstanceOf<OkObjectResult>());
@@ -91,7 +91,7 @@ namespace EShopAPI.nUnitTest
             int orderNumber = 123;
             double paymentAmount = 99.99;
             string paymentGateway = "PayPal";
-            string optimalDescription = "Order for electronic items";
+            string optionalDescription = "Order for electronic items";
 
             var newUserOrder = new UserOrdersModel
             {
@@ -99,13 +99,13 @@ namespace EShopAPI.nUnitTest
                 OrderNumber = orderNumber,
                 PayableAmount = paymentAmount,
                 PaymentGateway = paymentGateway,
-                OptionalDescription = optimalDescription
+                OptionalDescription = optionalDescription
             };
 
             _mockReceiptService.Setup(r => r.CreateReceiptAsync(It.IsAny<UserOrdersModel>())).ThrowsAsync(new Exception("Receipt creation failed"));
 
             // Act
-            var result = await _controller.AddUserAsync(userId, orderNumber, paymentAmount, paymentGateway, optimalDescription);
+            var result = await _controller.AddUserAsync(userId, orderNumber, paymentAmount, paymentGateway, optionalDescription);
 
             // Assert
             Assert.That(result.Result, Is.InstanceOf<ObjectResult>());

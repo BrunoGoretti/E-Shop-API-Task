@@ -16,7 +16,8 @@ namespace EShopAPI.Services
         {
             var newPaymentAmount = new UserOrdersModel
             {
-                PayableAmount = payAmount
+                PayableAmount = payAmount,
+                PaymentGateway = "DefaultGateway"
             };
 
             _context.DbUsers.Add(newPaymentAmount);

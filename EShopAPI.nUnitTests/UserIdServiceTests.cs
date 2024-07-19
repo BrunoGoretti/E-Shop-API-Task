@@ -35,6 +35,7 @@
             var userFromDb = await _context.DbUsers.FindAsync(result.UserId);
             ClassicAssert.NotNull(userFromDb);
             ClassicAssert.AreEqual(userId, userFromDb.UserId);
+            ClassicAssert.AreEqual("PayPal", userFromDb.PaymentGateway);
         }
 
         [Test]
@@ -49,6 +50,7 @@
             // Assert
             ClassicAssert.NotNull(result);
             ClassicAssert.AreEqual(userId, result.UserId);
+            ClassicAssert.AreEqual("PayPal", result.PaymentGateway); 
         }
     }
 }

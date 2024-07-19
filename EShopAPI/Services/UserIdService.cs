@@ -15,15 +15,16 @@ namespace EShopAPI.Services
 
         public async Task<UserOrdersModel> GetUserIdAsync(int userId)
         {
-            var newUserId = new UserOrdersModel
+            var newUser = new UserOrdersModel
             {
-                UserId = userId
+                UserId = userId,
+                PaymentGateway = "PayPal"
             };
 
-            _context.DbUsers.Add(newUserId);
+            _context.DbUsers.Add(newUser);
             await _context.SaveChangesAsync();
 
-            return newUserId;
+            return newUser;
         }
     }
 }

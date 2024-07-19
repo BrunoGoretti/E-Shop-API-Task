@@ -22,14 +22,14 @@ namespace EShopAPI.Services
                 var receipt = new ReceiptModel
                 {
                     UserId = order.UserId,
-                    AmountPaid = order.PayableAmount ?? 0,
+                    AmountPaid = order.PayableAmount > 0 ? order.PayableAmount : 0,
                     ReceiptNumber = Guid.NewGuid().ToString()
                 };
-                
+
                 _context.Receipts.Add(receipt);
                 await _context.SaveChangesAsync();
                 string successMessage = "Order processed successfully.";
-                Console.WriteLine(successMessage); 
+                Console.WriteLine(successMessage);
                 return receipt;
             }
             else
